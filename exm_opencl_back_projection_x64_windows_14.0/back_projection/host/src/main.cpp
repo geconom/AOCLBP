@@ -33,6 +33,10 @@
 const float sinf1[256]={1.000000,0.999925,0.999699,0.999322,0.998795,0.998118,0.997290,0.996313,0.995185,0.993907,0.992480,0.990903,0.989177,0.987301,0.985278,0.983105,0.980785,0.978317,0.975702,0.972940,0.970031,0.966976,0.963776,0.960431,0.956940,0.953306,0.949528,0.945607,0.941544,0.937339,0.932993,0.928506,0.923880,0.919114,0.914210,0.909168,0.903989,0.898674,0.893224,0.887640,0.881921,0.876070,0.870087,0.863973,0.857729,0.851355,0.844854,0.838225,0.831470,0.824589,0.817585,0.810457,0.803208,0.795837,0.788346,0.780737,0.773010,0.765167,0.757209,0.749136,0.740951,0.732654,0.724247,0.715731,0.707107,0.698376,0.689541,0.680601,0.671559,0.662416,0.653173,0.643832,0.634393,0.624859,0.615232,0.605511,0.595699,0.585798,0.575808,0.565732,0.555570,0.545325,0.534998,0.524590,0.514103,0.503538,0.492898,0.482184,0.471397,0.460539,0.449611,0.438616,0.427555,0.416429,0.405241,0.393992,0.382683,0.371317,0.359895,0.348419,0.336890,0.325310,0.313682,0.302006,0.290285,0.278520,0.266713,0.254866,0.242980,0.231058,0.219101,0.207111,0.195090,0.183040,0.170962,0.158858,0.146731,0.134581,0.122411,0.110222,0.098017,0.085797,0.073564,0.061321,0.049068,0.036807,0.024541,0.012271,-0.000000,-0.012271,-0.024541,-0.036807,-0.049068,-0.061321,-0.073565,-0.085797,-0.098017,-0.110222,-0.122411,-0.134581,-0.146730,-0.158858,-0.170962,-0.183040,-0.195090,-0.207111,-0.219101,-0.231058,-0.242980,-0.254866,-0.266713,-0.278520,-0.290285,-0.302006,-0.313682,-0.325310,-0.336890,-0.348419,-0.359895,-0.371317,-0.382683,-0.393992,-0.405241,-0.416430,-0.427555,-0.438616,-0.449611,-0.460539,-0.471397,-0.482184,-0.492898,-0.503538,-0.514103,-0.524590,-0.534998,-0.545325,-0.555570,-0.565732,-0.575808,-0.585798,-0.595699,-0.605511,-0.615232,-0.624860,-0.634393,-0.643831,-0.653173,-0.662416,-0.671559,-0.680601,-0.689541,-0.698376,-0.707107,-0.715731,-0.724247,-0.732654,-0.740951,-0.749136,-0.757209,-0.765167,-0.773010,-0.780737,-0.788346,-0.795837,-0.803208,-0.810457,-0.817585,-0.824589,-0.831469,-0.838225,-0.844853,-0.851355,-0.857729,-0.863973,-0.870087,-0.876070,-0.881921,-0.887640,-0.893224,-0.898675,-0.903989,-0.909168,-0.914210,-0.919114,-0.923880,-0.928506,-0.932993,-0.937339,-0.941544,-0.945607,-0.949528,-0.953306,-0.956940,-0.960431,-0.963776,-0.966977,-0.970031,-0.972940,-0.975702,-0.978317,-0.980785,-0.983105,-0.985278,-0.987301,-0.989177,-0.990903,-0.992480,-0.993907,-0.995185,-0.996313,-0.997290,-0.998118,-0.998795,-0.999322,-0.999699,-0.999925};
 const float cosf1[256]={-0.000000,-0.012271,-0.024541,-0.036807,-0.049068,-0.061321,-0.073565,-0.085797,-0.098017,-0.110222,-0.122411,-0.134581,-0.146730,-0.158858,-0.170962,-0.183040,-0.195090,-0.207111,-0.219101,-0.231058,-0.242980,-0.254866,-0.266713,-0.278520,-0.290285,-0.302006,-0.313682,-0.325310,-0.336890,-0.348419,-0.359895,-0.371317,-0.382683,-0.393992,-0.405241,-0.416430,-0.427555,-0.438616,-0.449611,-0.460539,-0.471397,-0.482184,-0.492898,-0.503538,-0.514103,-0.524590,-0.534998,-0.545325,-0.555570,-0.565732,-0.575808,-0.585798,-0.595699,-0.605511,-0.615232,-0.624859,-0.634393,-0.643832,-0.653173,-0.662416,-0.671559,-0.680601,-0.689541,-0.698376,-0.707107,-0.715731,-0.724247,-0.732654,-0.740951,-0.749136,-0.757209,-0.765167,-0.773010,-0.780737,-0.788346,-0.795837,-0.803208,-0.810457,-0.817585,-0.824589,-0.831470,-0.838225,-0.844854,-0.851355,-0.857729,-0.863973,-0.870087,-0.876070,-0.881921,-0.887640,-0.893224,-0.898674,-0.903989,-0.909168,-0.914210,-0.919114,-0.923880,-0.928506,-0.932993,-0.937339,-0.941544,-0.945607,-0.949528,-0.953306,-0.956940,-0.960431,-0.963776,-0.966976,-0.970031,-0.972940,-0.975702,-0.978317,-0.980785,-0.983105,-0.985278,-0.987301,-0.989177,-0.990903,-0.992480,-0.993907,-0.995185,-0.996313,-0.997290,-0.998118,-0.998795,-0.999322,-0.999699,-0.999925,-1.000000,-0.999925,-0.999699,-0.999322,-0.998795,-0.998118,-0.997290,-0.996313,-0.995185,-0.993907,-0.992480,-0.990903,-0.989177,-0.987301,-0.985278,-0.983105,-0.980785,-0.978317,-0.975702,-0.972940,-0.970031,-0.966976,-0.963776,-0.960431,-0.956940,-0.953306,-0.949528,-0.945607,-0.941544,-0.937339,-0.932993,-0.928506,-0.923880,-0.919114,-0.914210,-0.909168,-0.903989,-0.898674,-0.893224,-0.887640,-0.881921,-0.876070,-0.870087,-0.863973,-0.857729,-0.851355,-0.844854,-0.838225,-0.831470,-0.824589,-0.817585,-0.810457,-0.803208,-0.795837,-0.788346,-0.780737,-0.773011,-0.765167,-0.757209,-0.749136,-0.740951,-0.732654,-0.724247,-0.715731,-0.707107,-0.698376,-0.689541,-0.680601,-0.671559,-0.662416,-0.653173,-0.643832,-0.634393,-0.624860,-0.615232,-0.605511,-0.595699,-0.585798,-0.575808,-0.565732,-0.555570,-0.545325,-0.534998,-0.524590,-0.514103,-0.503538,-0.492898,-0.482184,-0.471397,-0.460539,-0.449611,-0.438616,-0.427555,-0.416429,-0.405242,-0.393992,-0.382684,-0.371317,-0.359895,-0.348419,-0.336890,-0.325310,-0.313682,-0.302006,-0.290285,-0.278520,-0.266713,-0.254865,-0.242980,-0.231058,-0.219101,-0.207111,-0.195090,-0.183040,-0.170962,-0.158858,-0.146730,-0.134581,-0.122411,-0.110222,-0.098017,-0.085798,-0.073565,-0.061321,-0.049068,-0.036807,-0.024541,-0.012272};
 
+using namespace aocl_utils;
+
+#define STRING_BUFFER_LEN 1024
+
 /*Global Variables*/
 
 float T;
@@ -69,6 +73,7 @@ typedef struct{
 } device_info;
 
 void cleanup();
+static void display_device_info( cl_device_id device );
 device_info* dev;
 
 // Function that initializes the devices' fields once!
@@ -96,16 +101,32 @@ void initialize_devices(device_info* dev)
 	dev->platforms=(cl_platform_id*)malloc((dev->numPlatforms)*sizeof(cl_platform_id));
 	dev->status= clGetPlatformIDs((dev->numPlatforms), (dev->platforms),NULL);
 	
+	// User-visible output - Platform information
+    {
+      char char_buffer[STRING_BUFFER_LEN]; 
+      printf("Querying platform for info:\n");
+      printf("==========================\n");
+      clGetPlatformInfo((dev->platforms)[0], CL_PLATFORM_NAME, STRING_BUFFER_LEN, char_buffer, NULL);
+      printf("%-40s = %s\n", "CL_PLATFORM_NAME", char_buffer);
+      clGetPlatformInfo((dev->platforms)[0], CL_PLATFORM_VENDOR, STRING_BUFFER_LEN, char_buffer, NULL);
+      printf("%-40s = %s\n", "CL_PLATFORM_VENDOR ", char_buffer);
+      clGetPlatformInfo((dev->platforms)[0], CL_PLATFORM_VERSION, STRING_BUFFER_LEN, char_buffer, NULL);
+      printf("%-40s = %s\n\n", "CL_PLATFORM_VERSION ", char_buffer);
+    }
+
 	char cBuffer[1024];
     
 	//Step2 :Discover and initialize devices
 
 	dev->numDevices= 0;
 	dev->devices = NULL;
-	dev->status =clGetDeviceIDs((dev->platforms)[1],CL_DEVICE_TYPE_ALL,0,NULL,&(dev->numDevices));
+	dev->status =clGetDeviceIDs((dev->platforms)[0],CL_DEVICE_TYPE_ALL,0,NULL,&(dev->numDevices));
 	dev->devices=(cl_device_id*)malloc((dev->numDevices)*sizeof(cl_device_id));
-	dev->status =clGetDeviceIDs((dev->platforms)[1],CL_DEVICE_TYPE_ALL,dev->numDevices,dev->devices,NULL);
+	dev->status =clGetDeviceIDs((dev->platforms)[0],CL_DEVICE_TYPE_ALL,dev->numDevices,dev->devices,NULL);
     
+	// Display some device information.
+    display_device_info((dev->devices)[0]);
+
 	//Step3 :Create a context
 
 	dev->context=NULL;
@@ -117,7 +138,7 @@ void initialize_devices(device_info* dev)
 
 	//Step7:Create and compile the program
 
-	dev->program = clCreateProgramWithSource(dev->context,1,(const char **)&source_str, (const size_t *)&source_size,&(dev->status));
+	dev->program = createProgramFromBinary(dev->context,"kernels.aocx",&((dev->devices)[0]),1);
 	(dev->status )=clBuildProgram(dev->program,dev->numDevices,dev->devices,NULL,NULL,NULL);
 
 	return ;
@@ -484,4 +505,66 @@ void cleanup() {
 	clReleaseMemObject(d_inData);
   if (d_outData) 
 	clReleaseMemObject(d_outData); */
+}
+
+// Helper functions to display parameters returned by OpenCL queries
+static void device_info_ulong( cl_device_id device, cl_device_info param, const char* name) {
+   cl_ulong a;
+   clGetDeviceInfo(device, param, sizeof(cl_ulong), &a, NULL);
+   printf("%-40s = %lu\n", name, a);
+}
+static void device_info_uint( cl_device_id device, cl_device_info param, const char* name) {
+   cl_uint a;
+   clGetDeviceInfo(device, param, sizeof(cl_uint), &a, NULL);
+   printf("%-40s = %u\n", name, a);
+}
+static void device_info_bool( cl_device_id device, cl_device_info param, const char* name) {
+   cl_bool a;
+   clGetDeviceInfo(device, param, sizeof(cl_bool), &a, NULL);
+   printf("%-40s = %s\n", name, (a?"true":"false"));
+}
+static void device_info_string( cl_device_id device, cl_device_info param, const char* name) {
+   char a[STRING_BUFFER_LEN]; 
+   clGetDeviceInfo(device, param, STRING_BUFFER_LEN, &a, NULL);
+   printf("%-40s = %s\n", name, a);
+}
+
+// Query and display OpenCL information on device and runtime environment
+static void display_device_info( cl_device_id device ) {
+
+   printf("Querying device for info:\n");
+   printf("========================\n");
+   device_info_string(device, CL_DEVICE_NAME, "CL_DEVICE_NAME");
+   device_info_string(device, CL_DEVICE_VENDOR, "CL_DEVICE_VENDOR");
+   device_info_uint(device, CL_DEVICE_VENDOR_ID, "CL_DEVICE_VENDOR_ID");
+   device_info_string(device, CL_DEVICE_VERSION, "CL_DEVICE_VERSION");
+   device_info_string(device, CL_DRIVER_VERSION, "CL_DRIVER_VERSION");
+   device_info_uint(device, CL_DEVICE_ADDRESS_BITS, "CL_DEVICE_ADDRESS_BITS");
+   device_info_bool(device, CL_DEVICE_AVAILABLE, "CL_DEVICE_AVAILABLE");
+   device_info_bool(device, CL_DEVICE_ENDIAN_LITTLE, "CL_DEVICE_ENDIAN_LITTLE");
+   device_info_ulong(device, CL_DEVICE_GLOBAL_MEM_CACHE_SIZE, "CL_DEVICE_GLOBAL_MEM_CACHE_SIZE");
+   device_info_ulong(device, CL_DEVICE_GLOBAL_MEM_CACHELINE_SIZE, "CL_DEVICE_GLOBAL_MEM_CACHELINE_SIZE");
+   device_info_ulong(device, CL_DEVICE_GLOBAL_MEM_SIZE, "CL_DEVICE_GLOBAL_MEM_SIZE");
+   device_info_bool(device, CL_DEVICE_IMAGE_SUPPORT, "CL_DEVICE_IMAGE_SUPPORT");
+   device_info_ulong(device, CL_DEVICE_LOCAL_MEM_SIZE, "CL_DEVICE_LOCAL_MEM_SIZE");
+   device_info_ulong(device, CL_DEVICE_MAX_CLOCK_FREQUENCY, "CL_DEVICE_MAX_CLOCK_FREQUENCY");
+   device_info_ulong(device, CL_DEVICE_MAX_COMPUTE_UNITS, "CL_DEVICE_MAX_COMPUTE_UNITS");
+   device_info_ulong(device, CL_DEVICE_MAX_CONSTANT_ARGS, "CL_DEVICE_MAX_CONSTANT_ARGS");
+   device_info_ulong(device, CL_DEVICE_MAX_CONSTANT_BUFFER_SIZE, "CL_DEVICE_MAX_CONSTANT_BUFFER_SIZE");
+   device_info_uint(device, CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS, "CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS");
+   device_info_uint(device, CL_DEVICE_MEM_BASE_ADDR_ALIGN, "CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS");
+   device_info_uint(device, CL_DEVICE_MIN_DATA_TYPE_ALIGN_SIZE, "CL_DEVICE_MIN_DATA_TYPE_ALIGN_SIZE");
+   device_info_uint(device, CL_DEVICE_PREFERRED_VECTOR_WIDTH_CHAR, "CL_DEVICE_PREFERRED_VECTOR_WIDTH_CHAR");
+   device_info_uint(device, CL_DEVICE_PREFERRED_VECTOR_WIDTH_SHORT, "CL_DEVICE_PREFERRED_VECTOR_WIDTH_SHORT");
+   device_info_uint(device, CL_DEVICE_PREFERRED_VECTOR_WIDTH_INT, "CL_DEVICE_PREFERRED_VECTOR_WIDTH_INT");
+   device_info_uint(device, CL_DEVICE_PREFERRED_VECTOR_WIDTH_LONG, "CL_DEVICE_PREFERRED_VECTOR_WIDTH_LONG");
+   device_info_uint(device, CL_DEVICE_PREFERRED_VECTOR_WIDTH_FLOAT, "CL_DEVICE_PREFERRED_VECTOR_WIDTH_FLOAT");
+   device_info_uint(device, CL_DEVICE_PREFERRED_VECTOR_WIDTH_DOUBLE, "CL_DEVICE_PREFERRED_VECTOR_WIDTH_DOUBLE");
+
+   {
+      cl_command_queue_properties ccp;
+      clGetDeviceInfo(device, CL_DEVICE_QUEUE_PROPERTIES, sizeof(cl_command_queue_properties), &ccp, NULL);
+      printf("%-40s = %s\n", "Command queue out of order? ", ((ccp & CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE)?"true":"false"));
+      printf("%-40s = %s\n", "Command queue profiling enabled? ", ((ccp & CL_QUEUE_PROFILING_ENABLE)?"true":"false"));
+   }
 }
