@@ -22,7 +22,6 @@
 #include <cstring> 
 #include "CL/opencl.h"
 #include "AOCL_Utils.h"
-#include "fft_config.h"
 #define MAX_SOURCE_SIZE (0x100000)
 
 /* Constants */
@@ -69,6 +68,7 @@ typedef struct{
 	cl_kernel kernel;
 } device_info;
 
+void cleanup();
 device_info* dev;
 
 // Function that initializes the devices' fields once!
@@ -462,4 +462,26 @@ int main(int argc,char* argv[])
   	free(filename);
  
   	return 0;
+}
+
+// Free the resources allocated during initialization in the fft1d example. Here, dummy, only for correct linking
+void cleanup() {
+/*  if(kernel) 
+    clReleaseKernel(kernel);  
+  if(program) 
+    clReleaseProgram(program);
+  if(queue) 
+    clReleaseCommandQueue(queue);
+  if(context) 
+    clReleaseContext(context);
+  if(h_inData)
+	alignedFree(h_inData);
+  if (h_outData)
+	alignedFree(h_outData);
+  if (h_verify)
+	alignedFree(h_verify);
+  if (d_inData)
+	clReleaseMemObject(d_inData);
+  if (d_outData) 
+	clReleaseMemObject(d_outData); */
 }
