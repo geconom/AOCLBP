@@ -194,7 +194,7 @@ void direct(device_info* devi,sinograms* g,int size,float* tau,float* pix)
   Sino=(float*)malloc(sinsize*numSino*sizeof(float));
   TSine=(float*)malloc(numSino*sizeof(float));
   TCosine=(float*)malloc(numSino*sizeof(float));
-  
+
   for(n=0;n<numSino;n++){
 	TSine[n]=(g->sine)[n];
 	TCosine[n]=(g->cosine)[n];
@@ -207,10 +207,9 @@ void direct(device_info* devi,sinograms* g,int size,float* tau,float* pix)
   int elements =numSino;
   int elements1=size*size;
   int elements2=size;
-  size_t datasize =sizeof(int)*elements;
-  size_t datasize1=sizeof(int)*elements*sinsize;
-  size_t datasize2=sizeof(int)*elements1;
-
+  size_t datasize =elements;
+  size_t datasize1=elements*sinsize;
+  size_t datasize2=elements1;
 
   //Step5:Create device buffers	
   bufferSino = clCreateBuffer(devi->context,CL_MEM_READ_ONLY,datasize1*sizeof(float),NULL,&(devi->status));
@@ -221,10 +220,10 @@ void direct(device_info* devi,sinograms* g,int size,float* tau,float* pix)
 
 	
   //Step6:Write host and data to device buffers
-  (devi->status)=clEnqueueWriteBuffer(devi->cmdQueue,bufferSino,CL_FALSE,0,datasize1,Sino,0,NULL,NULL);
-  (devi->status)=clEnqueueWriteBuffer(devi->cmdQueue,bufferTau,CL_FALSE,0,datasize,tau,0,NULL,NULL);
-  (devi->status)=clEnqueueWriteBuffer(devi->cmdQueue,bufferSine,CL_FALSE,0,datasize,TSine,0,NULL,NULL);
-  (devi->status)=clEnqueueWriteBuffer(devi->cmdQueue,bufferCos,CL_FALSE,0,datasize,TCosine,0,NULL,NULL);	
+  (devi->status)=clEnqueueWriteBuffer(devi->cmdQueue,bufferSino,CL_FALSE,0,datasize1*sizeof(float),Sino,0,NULL,NULL);
+  (devi->status)=clEnqueueWriteBuffer(devi->cmdQueue,bufferTau,CL_FALSE,0,datasize*sizeof(float),tau,0,NULL,NULL);
+  (devi->status)=clEnqueueWriteBuffer(devi->cmdQueue,bufferSine,CL_FALSE,0,datasize*sizeof(float),TSine,0,NULL,NULL);
+  (devi->status)=clEnqueueWriteBuffer(devi->cmdQueue,bufferCos,CL_FALSE,0,datasize*sizeof(float),TCosine,0,NULL,NULL);	
 	
   //Step8:Create the kernel
   devi->kernel=NULL;
@@ -244,7 +243,12 @@ void direct(device_info* devi,sinograms* g,int size,float* tau,float* pix)
   (devi->status)=clSetKernelArg(devi->kernel,9,sizeof(int),&sinsize);
   (devi->status)=clSetKernelArg(devi->kernel,10,sizeof(float),&scale);
   (devi->status)=clSetKernelArg(devi->kernel,11,sizeof(float),&oneOverT);
- 	
+ 
+  printf("\n\nKernel initialization is complete.\n");
+
+  // Get the iterationstamp to evaluate performance
+  double time = getCurrentTimestamp();
+
   //Step10:Configure the work-item structure
 
   size_t globalWorkSize[2]={size,size};
@@ -252,11 +256,14 @@ void direct(device_info* devi,sinograms* g,int size,float* tau,float* pix)
   //Step11:Enqueue the kernel for execution
   (devi->status)= clEnqueueNDRangeKernel(devi->cmdQueue,devi->kernel,2,NULL,globalWorkSize,NULL,0,NULL,NULL);
 
+  // Record execution time
+  time = getCurrentTimestamp() - time;
+
   //Step12:Read the output buffer back to the host
 	
-  clEnqueueReadBuffer(devi->cmdQueue,bufferSum,CL_TRUE,0,datasize2,pix,0,NULL,NULL);
+  clEnqueueReadBuffer(devi->cmdQueue,bufferSum,CL_TRUE,0,datasize2*sizeof(float),pix,0,NULL,NULL);
 
-
+  printf("\tProcessing time = %.4fms\n", (float)(time * 1E3));
     
   //Step13:Release OpenCl resources
 
