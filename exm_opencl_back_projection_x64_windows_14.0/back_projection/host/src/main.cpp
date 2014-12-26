@@ -80,20 +80,7 @@ device_info* dev;
 void initialize_devices(device_info* dev)
 
 {
-    FILE *fp;
-    char *source_str;
-    size_t source_size;
- 
-    fp = fopen("kernels.cl", "r");
-    if (!fp) {
-    fprintf(stderr, "Failed to load kernel.\n");
-    exit(1);
-    }
-    source_str = (char*)malloc(MAX_SOURCE_SIZE);
-    source_size = fread( source_str, 1, MAX_SOURCE_SIZE, fp);
-    fclose( fp );
-
-	//Step1 :discover and initialize platforms
+    //Step1 :discover and initialize platforms
 
 	dev->numPlatforms= 0;
 	dev->platforms= NULL;
@@ -114,8 +101,7 @@ void initialize_devices(device_info* dev)
       printf("%-40s = %s\n\n", "CL_PLATFORM_VERSION ", char_buffer);
     }
 
-	char cBuffer[1024];
-    
+  
 	//Step2 :Discover and initialize devices
 
 	dev->numDevices= 0;
@@ -172,14 +158,11 @@ void direct(device_info* devi,sinograms* g,int size,float* tau,float* pix)
 {
   int m;        //x direction
   int n;        //y direction
-  float temp;
   float* Sino=NULL;
   float* TSine=NULL;
   float* TCosine=NULL;
   char* filename = "output.txt";
-  FILE* output;
-
-  float* curRow; 
+ 
   float middle = ((float)(g->size))/2-0.5;
   float halfSize = 0.5*size;
   int numSino = g->num;
@@ -187,7 +170,6 @@ void direct(device_info* devi,sinograms* g,int size,float* tau,float* pix)
   float scale = M_PI/numSino;      
  // float* d1=NULL;
  
-  FILE* output1;
   char* f1=OUT1;
 
 
@@ -296,14 +278,10 @@ sinograms* sinoFromFile(char* filename,float* s1, float* c1)
   //char* trigFilename = TRIG_FILENAME;
   sinograms* sino;
   int numSino;
-  int tempNumSino;
   int i=0;
   int sinoSize;
   char* curValue = (char*)malloc(25*sizeof(char));
-  float curData;
   int j=0;
-  int k;
-  int m;
   float T;
   char* exponent;
   int exp;
@@ -386,8 +364,7 @@ sinograms* sinoFromFile(char* filename,float* s1, float* c1)
 void precomputeTrig(int P,float* s1, float* c1)
 {
   int i;
-  float theta;
-
+  
   for(i=0;i<P;i++){
     s1[i]=sinf1[i];
     c1[i]=cosf1[i];
@@ -408,12 +385,9 @@ int main(int argc,char* argv[])
   int size;
  
   float* tau;
-  float* curRow;
-
+  
   FILE* output;
   char* filename2 = OUTPUT_FILENAME;
-  int tempNumSino;
-
 
     /*Step1 Read Input*/
     
