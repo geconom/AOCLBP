@@ -13,7 +13,7 @@
 
 
 # Creating a static library
-TARGET = back_projection
+TARGET = bin/back_projection
 
 # Where is the Altera SDK for OpenCL software?
 ifeq ($(wildcard $(ALTERAOCLSDKROOT)),)
