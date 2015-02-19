@@ -238,6 +238,7 @@ void direct(device_info* devi,sinograms* g,int size,float* tau,float* pix,int Wo
 	
   //Step11:Enqueue the kernel for execution
   (devi->status)= clEnqueueNDRangeKernel(devi->cmdQueue,devi->kernel,2,NULL,globalWorkSize,localWorkSize,0,NULL,NULL);
+  (devi->status)= clFinish(devi->cmdQueue);
 
   // Record execution time
   time = getCurrentTimestamp() - time;
