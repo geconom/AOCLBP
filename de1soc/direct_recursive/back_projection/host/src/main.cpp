@@ -30,6 +30,8 @@
 #define M_PI 3.14159265358979323846
 #define OUTPUT_FILENAME "outputImage1.txt" 
 #define OUT1 "curr.txt"
+#define LINEAR_SUPPORT 1
+#define RADIAL_SUPPORT LINEAR_SUPPORT
 const float sinf1[256]={1.000000,0.999925,0.999699,0.999322,0.998795,0.998118,0.997290,0.996313,0.995185,0.993907,0.992480,0.990903,0.989177,0.987301,0.985278,0.983105,0.980785,0.978317,0.975702,0.972940,0.970031,0.966976,0.963776,0.960431,0.956940,0.953306,0.949528,0.945607,0.941544,0.937339,0.932993,0.928506,0.923880,0.919114,0.914210,0.909168,0.903989,0.898674,0.893224,0.887640,0.881921,0.876070,0.870087,0.863973,0.857729,0.851355,0.844854,0.838225,0.831470,0.824589,0.817585,0.810457,0.803208,0.795837,0.788346,0.780737,0.773010,0.765167,0.757209,0.749136,0.740951,0.732654,0.724247,0.715731,0.707107,0.698376,0.689541,0.680601,0.671559,0.662416,0.653173,0.643832,0.634393,0.624859,0.615232,0.605511,0.595699,0.585798,0.575808,0.565732,0.555570,0.545325,0.534998,0.524590,0.514103,0.503538,0.492898,0.482184,0.471397,0.460539,0.449611,0.438616,0.427555,0.416429,0.405241,0.393992,0.382683,0.371317,0.359895,0.348419,0.336890,0.325310,0.313682,0.302006,0.290285,0.278520,0.266713,0.254866,0.242980,0.231058,0.219101,0.207111,0.195090,0.183040,0.170962,0.158858,0.146731,0.134581,0.122411,0.110222,0.098017,0.085797,0.073564,0.061321,0.049068,0.036807,0.024541,0.012271,-0.000000,-0.012271,-0.024541,-0.036807,-0.049068,-0.061321,-0.073565,-0.085797,-0.098017,-0.110222,-0.122411,-0.134581,-0.146730,-0.158858,-0.170962,-0.183040,-0.195090,-0.207111,-0.219101,-0.231058,-0.242980,-0.254866,-0.266713,-0.278520,-0.290285,-0.302006,-0.313682,-0.325310,-0.336890,-0.348419,-0.359895,-0.371317,-0.382683,-0.393992,-0.405241,-0.416430,-0.427555,-0.438616,-0.449611,-0.460539,-0.471397,-0.482184,-0.492898,-0.503538,-0.514103,-0.524590,-0.534998,-0.545325,-0.555570,-0.565732,-0.575808,-0.585798,-0.595699,-0.605511,-0.615232,-0.624860,-0.634393,-0.643831,-0.653173,-0.662416,-0.671559,-0.680601,-0.689541,-0.698376,-0.707107,-0.715731,-0.724247,-0.732654,-0.740951,-0.749136,-0.757209,-0.765167,-0.773010,-0.780737,-0.788346,-0.795837,-0.803208,-0.810457,-0.817585,-0.824589,-0.831469,-0.838225,-0.844853,-0.851355,-0.857729,-0.863973,-0.870087,-0.876070,-0.881921,-0.887640,-0.893224,-0.898675,-0.903989,-0.909168,-0.914210,-0.919114,-0.923880,-0.928506,-0.932993,-0.937339,-0.941544,-0.945607,-0.949528,-0.953306,-0.956940,-0.960431,-0.963776,-0.966977,-0.970031,-0.972940,-0.975702,-0.978317,-0.980785,-0.983105,-0.985278,-0.987301,-0.989177,-0.990903,-0.992480,-0.993907,-0.995185,-0.996313,-0.997290,-0.998118,-0.998795,-0.999322,-0.999699,-0.999925};
 const float cosf1[256]={-0.000000,-0.012271,-0.024541,-0.036807,-0.049068,-0.061321,-0.073565,-0.085797,-0.098017,-0.110222,-0.122411,-0.134581,-0.146730,-0.158858,-0.170962,-0.183040,-0.195090,-0.207111,-0.219101,-0.231058,-0.242980,-0.254866,-0.266713,-0.278520,-0.290285,-0.302006,-0.313682,-0.325310,-0.336890,-0.348419,-0.359895,-0.371317,-0.382683,-0.393992,-0.405241,-0.416430,-0.427555,-0.438616,-0.449611,-0.460539,-0.471397,-0.482184,-0.492898,-0.503538,-0.514103,-0.524590,-0.534998,-0.545325,-0.555570,-0.565732,-0.575808,-0.585798,-0.595699,-0.605511,-0.615232,-0.624859,-0.634393,-0.643832,-0.653173,-0.662416,-0.671559,-0.680601,-0.689541,-0.698376,-0.707107,-0.715731,-0.724247,-0.732654,-0.740951,-0.749136,-0.757209,-0.765167,-0.773010,-0.780737,-0.788346,-0.795837,-0.803208,-0.810457,-0.817585,-0.824589,-0.831470,-0.838225,-0.844854,-0.851355,-0.857729,-0.863973,-0.870087,-0.876070,-0.881921,-0.887640,-0.893224,-0.898674,-0.903989,-0.909168,-0.914210,-0.919114,-0.923880,-0.928506,-0.932993,-0.937339,-0.941544,-0.945607,-0.949528,-0.953306,-0.956940,-0.960431,-0.963776,-0.966976,-0.970031,-0.972940,-0.975702,-0.978317,-0.980785,-0.983105,-0.985278,-0.987301,-0.989177,-0.990903,-0.992480,-0.993907,-0.995185,-0.996313,-0.997290,-0.998118,-0.998795,-0.999322,-0.999699,-0.999925,-1.000000,-0.999925,-0.999699,-0.999322,-0.998795,-0.998118,-0.997290,-0.996313,-0.995185,-0.993907,-0.992480,-0.990903,-0.989177,-0.987301,-0.985278,-0.983105,-0.980785,-0.978317,-0.975702,-0.972940,-0.970031,-0.966976,-0.963776,-0.960431,-0.956940,-0.953306,-0.949528,-0.945607,-0.941544,-0.937339,-0.932993,-0.928506,-0.923880,-0.919114,-0.914210,-0.909168,-0.903989,-0.898674,-0.893224,-0.887640,-0.881921,-0.876070,-0.870087,-0.863973,-0.857729,-0.851355,-0.844854,-0.838225,-0.831470,-0.824589,-0.817585,-0.810457,-0.803208,-0.795837,-0.788346,-0.780737,-0.773011,-0.765167,-0.757209,-0.749136,-0.740951,-0.732654,-0.724247,-0.715731,-0.707107,-0.698376,-0.689541,-0.680601,-0.671559,-0.662416,-0.653173,-0.643832,-0.634393,-0.624860,-0.615232,-0.605511,-0.595699,-0.585798,-0.575808,-0.565732,-0.555570,-0.545325,-0.534998,-0.524590,-0.514103,-0.503538,-0.492898,-0.482184,-0.471397,-0.460539,-0.449611,-0.438616,-0.427555,-0.416429,-0.405242,-0.393992,-0.382684,-0.371317,-0.359895,-0.348419,-0.336890,-0.325310,-0.313682,-0.302006,-0.290285,-0.278520,-0.266713,-0.254865,-0.242980,-0.231058,-0.219101,-0.207111,-0.195090,-0.183040,-0.170962,-0.158858,-0.146730,-0.134581,-0.122411,-0.110222,-0.098017,-0.085798,-0.073565,-0.061321,-0.049068,-0.036807,-0.024541,-0.012272};
 
@@ -61,6 +63,12 @@ typedef struct{
 } sinograms;
 
 typedef struct{
+
+  int size;
+  float** pixel;                //pixel[0] refers to the lowest row of the image, pixel[i][0] refers to the 
+} image;
+
+typedef struct{
 	cl_uint numPlatforms;
 	cl_platform_id *platforms;
 	cl_int status;
@@ -75,6 +83,11 @@ typedef struct{
 void cleanup();
 static void display_device_info( cl_device_id device );
 device_info* dev;
+
+float myTheta(int p,int P)
+{
+  return M_PI*p/P+M_PI/2;
+}
 
 // Function that initializes the devices' fields once!
 void initialize_devices(device_info* dev)
@@ -148,35 +161,126 @@ void freeSino(sinograms* sino)
   free(sino->cosine);
 }
 
+
+/*
+ * caller free both sino and newSino
+ * 
+ * This function prepares a new set of sinograms for next recursive call w/o downsampling the sinograms angularly.
+ *
+ */
+sinograms* newSinoForNextIter2(sinograms* sino,int newSinoSize,float constShiftingFactor,float* nu_i)
+{
+
+  int P = sino->num;
+  sinograms* newSino;
+  int size = sino->size;
+  int newNumSino;
+
+  int m,n,k,p;
+  float kk,pp;
+  float sum;
+  float angle;
+
+  
+  float temp1,temp2,temp3;
+  int shiftingFactor;
+
+  float radialShift;
+  float totalShift;
+  int n2;
+  int lowerPBound,upperPBound,lowerKBound,upperKBound;
+
+  float radialSupport;
+
+  //preparing new sinograms
+  newSino = (sinograms*)malloc(1*sizeof(sinograms));
+  newSino->T = T;
+
+  newSino->size = newSinoSize; 
+  newSino->num = P;
+
+  newNumSino = newSino->num;
+  (newSino->sino)  = (float**)malloc(newNumSino*sizeof(float*));
+  (newSino->sine) = (float*)malloc(newNumSino*sizeof(float));
+  (newSino->cosine) = (float*)malloc(newNumSino*sizeof(float));
+
+  radialSupport = RADIAL_SUPPORT;
+
+  //for each angle of the new set of sinograms
+  for(n=0;n<newNumSino;n++){
+    //copy from old sinograms directly
+    (newSino->sino)[n] = (float*)malloc(newSinoSize*sizeof(float));
+    (newSino->sine)[n] = (sino->sine)[n];
+    (newSino->cosine)[n] = (sino->cosine)[n];    
+    
+    shiftingFactor = rintf(nu_i[n]) + constShiftingFactor;      
+
+    //for each entry in each of the new sinograms
+    for(m=0;m<newSinoSize;m++){
+      //we just copy the values from old ones, because we are not downsampling or filtering here.
+      (newSino->sino)[n][m] = (sino->sino)[n][m-shiftingFactor];
+	  
+    }//end for m
+  }//end for n
+  
+  return newSino;
+}
+//--------------------------------------------------------------
+
+
+/*
+ * computes 'nu' for given sine/cosine values and given shifting constants (\delta)
+ *
+ */
+float nu(float tau,float shiftX,float shiftY,float sine,float cosine)//,float oneOverT)
+{
+  float temp1;
+  float temp2;
+  
+  temp1 = (shiftX)*cosine;
+  temp2 = (shiftY)*sine;
+
+  return tau - (temp1+temp2);
+}
+
+
+/*
+ * This function is the top-level function for recursive backprojection.
+ * It makes a call to 'direct' once size<=baseSize.
+ */
+
 /*
  * direct(the sinograms,the size of the image, tau's,output image)
  *
  * direct corresponds EXACTLY to the direct method. 
  *
  */
-void direct(device_info* devi,sinograms* g,int size,float* tau,float* pix)
+
+
+void direct(device_info* devi,sinograms* g,int size,float* tau,image* ans)
 {
   int m;        //x direction
   int n;        //y direction
+  float temp;
   float* Sino=NULL;
   float* TSine=NULL;
   float* TCosine=NULL;
-  char* filename = "output.txt";
- 
+  float* pixel=NULL;
+  float* curRow; 
   float middle = ((float)(g->size))/2-0.5;
   float halfSize = 0.5*size;
   int numSino = g->num;
   int sinsize = g->size;
   float scale = M_PI/numSino;      
- // float* d1=NULL;
- 
+
+  FILE* output1;
   char* f1=OUT1;
 
-
+  pixel=(float*)malloc(size*size*sizeof(float));
   Sino=(float*)malloc(sinsize*numSino*sizeof(float));
   TSine=(float*)malloc(numSino*sizeof(float));
   TCosine=(float*)malloc(numSino*sizeof(float));
-
+  
   for(n=0;n<numSino;n++){
 	TSine[n]=(g->sine)[n];
 	TCosine[n]=(g->cosine)[n];
@@ -185,13 +289,14 @@ void direct(device_info* devi,sinograms* g,int size,float* tau,float* pix)
 	}
   }
 
-       	
+  //printf("test1\n");      	
   int elements =numSino;
   int elements1=size*size;
   int elements2=size;
   size_t datasize =elements;
   size_t datasize1=elements*sinsize;
   size_t datasize2=elements1;
+
 
   //Step5:Create device buffers	
   bufferSino = clCreateBuffer(devi->context,CL_MEM_READ_ONLY,datasize1*sizeof(float),NULL,&(devi->status));
@@ -244,9 +349,15 @@ void direct(device_info* devi,sinograms* g,int size,float* tau,float* pix)
 
   //Step12:Read the output buffer back to the host
 	
-  clEnqueueReadBuffer(devi->cmdQueue,bufferSum,CL_TRUE,0,datasize2*sizeof(float),pix,0,NULL,NULL);
-
-  printf("\tProcessing time = %.4fms\n", (float)(time * 1E3));
+  clEnqueueReadBuffer(devi->cmdQueue,bufferSum,CL_TRUE,0,datasize2*sizeof(float),pixel,0,NULL,NULL);
+  
+  printf("\tKernel processing time = %.4fms\n", (float)(time * 1E3));
+  //printf("test2");
+  for(n=0;n<size;n++){
+    for(m=0;m<size;m++){
+	(ans->pixel)[n][m]=pixel[n*size+m];
+    } 
+  } 
     
   //Step13:Release OpenCl resources
 
@@ -259,9 +370,162 @@ void direct(device_info* devi,sinograms* g,int size,float* tau,float* pix)
   free(Sino);
   free(TSine);
   free(TCosine);
-
+  free(pixel);
+  pixel=NULL;
 }
 
+
+void bp(device_info* devic,sinograms* sino,int size,float* tau,image* ans)
+{
+  sinograms* newSino;
+  image* subImage;
+
+  int i,j,m,n,k,p,u,v;
+
+  float* curRow;
+  float temp1,temp2;
+
+  int pp;
+
+  int newSize;
+  int numSino;
+  int sinoSize;
+  int offsetX;
+  int offsetY;
+
+  float shiftX,shiftY; 
+
+  float* nu_i;
+  float* nu_temp;
+  float nu_p,nu_2n;
+
+  int P = sino->num;
+  float angle;
+
+  float sum=0;
+  float shift;
+
+  int newSinoSize;
+  int newNumSino;
+  int constShiftingFactor;
+
+  if(size<=baseSize || sino->num <=1){ 
+    //BASE CASE!!!!
+
+    direct(devic,sino,size,tau,ans);  
+
+    return;
+
+  } else {
+    //GENERAL CASE
+  
+    subImage = (image*)malloc(1*sizeof(image));          //prepare subImage for recursive call
+    newSize = size/2;
+    numSino = (sino->num);
+    sinoSize = (sino->size);
+
+    subImage->size = newSize;
+    (subImage->pixel) = (float**)malloc(newSize*sizeof(float*));
+    shift = (float)size/4 * oneOverT;  //save some computations when computing nu's by premultiply with 1/T
+
+    newSinoSize = ceilf((float)sinoSize/2) + (sinoSize%4==3 || sinoSize%4==2?1:0);
+    constShiftingFactor = ((float)newSinoSize/2) - ((float)sinoSize/2);    
+
+    //for each part (that we break the image into)
+    for(i=0;i<NUM_PARTS;i++){
+
+      if(i==0){
+	shiftX = shift;
+	shiftY = shift;
+      } else if(i==1){
+	shiftX = -shift;
+	shiftY = shift;
+      } else if(i==2){
+	shiftX = -shift;
+	shiftY = -shift;
+      } else {
+	shiftX = shift;
+	shiftY = -shift;
+      }
+
+
+      /************/
+
+      nu_i = (float*)malloc(numSino*sizeof(float));
+      nu_temp = (float*)malloc(numSino*sizeof(float));
+
+      for(p=0;p<numSino;p++){
+
+	nu_i[p] = nu(tau[p],shiftX,shiftY,(sino->sine)[p],(sino->cosine)[p]);//,oneOverT);
+	nu_temp[p] = rintf(nu_i[p]);
+      }
+
+      //nu_i are real nu's (for this quadrant, for all theta's)
+      //nu_temp are rounded nu's
+
+	newSino = newSinoForNextIter2(sino,newSinoSize,constShiftingFactor,nu_i);
+	pp = 1;   
+    
+
+      /************/
+
+
+      
+      //manipulate the right part of the image
+      if(i<2){
+	// 0 and 1
+	offsetY = newSize;
+
+      } else {
+	// 2 and 3
+	offsetY = 0;
+      }
+
+      if(i==0 || i==3){
+	// 0 and 3
+	offsetX = newSize;
+      } else {
+	// 1 and 2
+	offsetX = 0;
+      }
+
+      //make subImages point to appropriate parts of the big image
+
+      for(m=0;m<newSize;m++){
+	(subImage->pixel)[m] = (ans->pixel)[m+offsetY] + offsetX;
+      }
+      
+      newNumSino = (newSino->num);
+
+      //for each nu_p, compute <nu_p>
+
+      for(p=0;p<newNumSino;p++){
+	nu_i[p] = nu_i[pp*p]-nu_temp[pp*p];
+      }
+
+      //call bp recursively
+      bp(devic,newSino,newSize,nu_i,subImage);    
+      
+
+      freeSino(newSino);
+      free(newSino);
+      newSino = NULL;
+      free(nu_i);
+      free(nu_temp);
+      nu_i = NULL;
+    
+    }//end for i
+
+    free(subImage);
+    free(subImage->pixel);
+    //do not free subImage's pixels, because they are the output!
+    
+    return;
+
+  }//end if not base case
+
+
+}//end function bp
 
 
 /*
@@ -384,11 +648,13 @@ int main(int argc,char* argv[])
   int j;
   int numSino,sinoSize;
   int size;
- 
+  image* img = (image*)malloc(1*sizeof(image)); 
   float* tau;
-  
+  float* curRow;
+
   FILE* output;
   char* filename2 = OUTPUT_FILENAME;
+  int tempNumSino;
 
     /*Step1 Read Input*/
     
@@ -406,13 +672,20 @@ int main(int argc,char* argv[])
 	}
 	size = atoi(argv[2]);
  
+  //argument3 is the base case size B
+	if(argv[3] == NULL){
+		printf("baseSize not set\n");
+		exit(0);
+	}
+
+	baseSize = atoi(argv[3]);
   
-	//argument3 is the input filename (containing sinograms)
-	if(argv[3]==NULL){
+	//argument4 is the input filename (containing sinograms)
+	if(argv[4]==NULL){
 		printf("filename not set\n");
 		exit(0);
 	}
-	strcpy(filename,argv[3]);
+	strcpy(filename,argv[4]);
 
     /*Step2 Precompute Trig and Initialize Devices*/
     
@@ -430,15 +703,29 @@ int main(int argc,char* argv[])
 	
 	numSino = sino->num;	
 	sinoSize=sino->size;
-    pixel=(float*)malloc(size*size*sizeof(float*));
+    	
 		 
+ 	(img->size) = size;
+  	(img->pixel) = (float**)calloc(size,sizeof(float*));
+  
 
-  	tau = (float*)calloc(sino->num,sizeof(float));
+  	for(i=0;i<size;i++){
+    		(img->pixel)[i] = (float*)calloc(size,sizeof(float));
+  	}
+  	
+	tau = (float*)calloc(sino->num,sizeof(float));
   	T = sino->T;
   	oneOverT = 1/T;
 
     /*Step4 Execute the direct method */	
-    direct(dev,sino,size,tau,pixel);
+	// Get the iterationstamp to evaluate performance
+    double time = getCurrentTimestamp();
+
+    bp(dev,sino,size,tau,img);
+
+	// Record execution time
+    time = getCurrentTimestamp() - time;
+    printf("\tOverall processing time = %.4fms\n", (float)(time * 1E3));
 
     /*Step5 output image values to file (for used in matlab)*/
 
