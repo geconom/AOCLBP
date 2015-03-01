@@ -257,7 +257,7 @@ float nu(float tau,float shiftX,float shiftY,float sine,float cosine)//,float on
  */
 
 
-void direct(device_info* devi,sinograms* g,int size,float* tau,image* ans)
+double direct(device_info* devi,sinograms* g,int size,float* tau,image* ans)
 {
   int m;        //x direction
   int n;        //y direction
@@ -351,7 +351,7 @@ void direct(device_info* devi,sinograms* g,int size,float* tau,image* ans)
 	
   clEnqueueReadBuffer(devi->cmdQueue,bufferSum,CL_TRUE,0,datasize2*sizeof(float),pixel,0,NULL,NULL);
   
-  printf("\tKernel processing time = %.4fms\n", (float)(time * 1E3));
+  //printf("\tKernel processing time = %.4fms\n", (float)(time * 1E3));
   //printf("test2");
   for(n=0;n<size;n++){
     for(m=0;m<size;m++){
@@ -372,10 +372,11 @@ void direct(device_info* devi,sinograms* g,int size,float* tau,image* ans)
   free(TCosine);
   free(pixel);
   pixel=NULL;
+  return time;
 }
 
 
-void bp(device_info* devic,sinograms* sino,int size,float* tau,image* ans)
+double bp(device_info* devic,sinograms* sino,int size,float* tau,image* ans,double time_in)
 {
   sinograms* newSino;
   image* subImage;
@@ -408,13 +409,15 @@ void bp(device_info* devic,sinograms* sino,int size,float* tau,image* ans)
   int newSinoSize;
   int newNumSino;
   int constShiftingFactor;
+  double time_out;
+  double time[NUM_PARTS+1];
 
   if(size<=baseSize || sino->num <=1){ 
     //BASE CASE!!!!
 
-    direct(devic,sino,size,tau,ans);  
+    time_out=direct(devic,sino,size,tau,ans);  
 
-    return;
+    return time_out;
 
   } else {
     //GENERAL CASE
@@ -432,6 +435,7 @@ void bp(device_info* devic,sinograms* sino,int size,float* tau,image* ans)
     constShiftingFactor = ((float)newSinoSize/2) - ((float)sinoSize/2);    
 
     //for each part (that we break the image into)
+	time[0]=time_in;
     for(i=0;i<NUM_PARTS;i++){
 
       if(i==0){
@@ -504,7 +508,7 @@ void bp(device_info* devic,sinograms* sino,int size,float* tau,image* ans)
       }
 
       //call bp recursively
-      bp(devic,newSino,newSize,nu_i,subImage);    
+      time[i+1]=bp(devic,newSino,newSize,nu_i,subImage,time[i])+time[i];    
       
 
       freeSino(newSino);
@@ -516,11 +520,12 @@ void bp(device_info* devic,sinograms* sino,int size,float* tau,image* ans)
     
     }//end for i
 
+	time_out=time[NUM_PARTS];
     free(subImage);
     free(subImage->pixel);
     //do not free subImage's pixels, because they are the output!
     
-    return;
+    return time_out;
 
   }//end if not base case
 
@@ -719,12 +724,8 @@ int main(int argc,char* argv[])
 
     /*Step4 Execute the direct method */	
 	// Get the iterationstamp to evaluate performance
-    double time = getCurrentTimestamp();
+    double time = bp(dev,sino,size,tau,img,0);
 
-    bp(dev,sino,size,tau,img);
-
-	// Record execution time
-    time = getCurrentTimestamp() - time;
     printf("\tOverall processing time = %.4fms\n", (float)(time * 1E3));
 
     /*Step5 output image values to file (for used in matlab)*/
