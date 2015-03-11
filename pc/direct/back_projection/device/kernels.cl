@@ -17,7 +17,7 @@ float weight(float exactRadialPosition,int k)
 }
 
 
-__kernel void sum_sino(__global float* bufsino,__global float* bufsum,float mid,float halfs,int nsino,int siz,__global float* buftau,__global float* bufsine,__global float* bufcos,int sinoSize,float scal,float ooT)
+__kernel void sum_sino(__global float* restrict bufsino,__global float* restrict bufsum,float mid,float halfs,int nsino,int siz,__global float* restrict buftau,__global float* restrict bufsine,__global float* restrict bufcos,int sinoSize,float scal,float ooT)
   {
 
   #define ERROR_TOLERANCE 0.0001
