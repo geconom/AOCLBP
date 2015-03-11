@@ -22,6 +22,8 @@
 #include "CL/opencl.h"
 #include "AOCL_Utils.h"
 
+/* Constants */
+#define M_PI 3.14159265358979323846
 
 /*
  * This program implements the hierachical fast backprojection algorithm.
