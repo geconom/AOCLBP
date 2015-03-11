@@ -1,3 +1,5 @@
+//#include <math.h>
+
 float weight(float exactRadialPosition,int k)
 {
   #define RADIAL_INTERP(x) LINEAR_INTERP(x)
@@ -14,7 +16,8 @@ float weight(float exactRadialPosition,int k)
   return ans;
 }
 
-__kernel void sum_sino(__constant float* restrict bufsino,__global float* bufsum,float mid,float halfs,int nsino,int siz,__constant float* restrict buftau,__constant float* restrict bufsine,__constant float* restrict bufcos,int sinoSize,float scal,float ooT)
+
+__kernel void sum_sino(__global float* bufsino,__global float* bufsum,float mid,float halfs,int nsino,int siz,__global float* buftau,__global float* bufsine,__global float* bufcos,int sinoSize,float scal,float ooT)
   {
 
   #define ERROR_TOLERANCE 0.0001
@@ -90,3 +93,6 @@ __kernel void sum_sino(__constant float* restrict bufsino,__global float* bufsum
   bufsum[ip]=my_sum*scal; 
  
 }
+
+
+

@@ -17,7 +17,7 @@ float weight(float exactRadialPosition,int k)
 }
 
 
-float sum_sino(__constant float* bufsino,float mid,float halfs,int nsino,int siz,__constant float* buftau,__constant float* bufsine,__constant float* bufcos,int sinoSize,float scal,float ooT,int m,int n)
+float sum_sino(__global float* bufsino,float mid,float halfs,int nsino,int siz,__global float* buftau,__global float* bufsine,__global float* bufcos,int sinoSize,float scal,float ooT,int m,int n)
   {
 
   #define ERROR_TOLERANCE 0.0001
@@ -93,14 +93,13 @@ float sum_sino(__constant float* bufsino,float mid,float halfs,int nsino,int siz
 }
 
 
-__kernel void calculate_tile(__constant float* restrict bufsino,__global float* bufsum,float mid,float halfs,int nsino,int siz,__constant float* restrict buftau,__constant float* restrict bufsine,__constant float* restrict bufcos,int sinoSize,float scal,float ooT,int divideNum)
+__kernel void calculate_tile(__global float* bufsino,__global float* bufsum,float mid,float halfs,int nsino,int siz,__global float* buftau,__global float* bufsine,__global float* bufcos,int sinoSize,float scal,float ooT,int divideNum)
 
 {
   int idx=get_global_id(0);
   int idy=get_global_id(1);
   int k,l,m,n,position;
-
-
+  
   m=idx*divideNum;
 
   for(k=0;k<divideNum;k++){
