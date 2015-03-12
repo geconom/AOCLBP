@@ -84,7 +84,7 @@ void initialize_devices(device_info* dev)
 	char *source_str;
 	size_t source_size;
 
-	fp = fopen("kernels.cl", "r");
+	fp = fopen("kernels_tile.cl", "r");
 	if (!fp) {
 		fprintf(stderr, "Failed to load kernel.\n");
 		exit(1);
