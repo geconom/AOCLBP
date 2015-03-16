@@ -49,7 +49,7 @@ float* cosine;
 int baseSize,sumi;
 int dwnsplSize;
 cl_mem b1,b2,b3,bufferSum,bufferSino,bufferTau,bufferSine,bufferCos;
-float* pixel=NULL;
+//float* pixel=NULL;
 
 typedef struct{
 
@@ -389,7 +389,7 @@ double direct(device_info* devi,sinograms* g,int size,float* tau,image* ans)
 }
 
 
-double bp(device_info* devic,sinograms* sino,int size,float* tau,image* ans,double time_in)
+double bp(device_info* devic,sinograms* sino,int size,float* tau,image* ans)
 {
   sinograms* newSino;
   image* subImage;
@@ -423,7 +423,7 @@ double bp(device_info* devic,sinograms* sino,int size,float* tau,image* ans,doub
   int newNumSino;
   int constShiftingFactor;
   double time_out;
-  double time[NUM_PARTS+1];
+  double time[NUM_PARTS];
 
   if(size<=baseSize || sino->num <=1){ 
     //BASE CASE!!!!
@@ -448,8 +448,7 @@ double bp(device_info* devic,sinograms* sino,int size,float* tau,image* ans,doub
     constShiftingFactor = ((float)newSinoSize/2) - ((float)sinoSize/2);    
 
     //for each part (that we break the image into)
-	time[0]=time_in;
-    for(i=0;i<NUM_PARTS;i++){
+	for(i=0;i<NUM_PARTS;i++){
 
       if(i==0){
 	shiftX = shift;
@@ -521,7 +520,7 @@ double bp(device_info* devic,sinograms* sino,int size,float* tau,image* ans,doub
       }
 
       //call bp recursively
-      time[i+1]=bp(devic,newSino,newSize,nu_i,subImage,time[i])+time[i];    
+      time[i]=bp(devic,newSino,newSize,nu_i,subImage);    
       
 
       freeSino(newSino);
@@ -533,9 +532,11 @@ double bp(device_info* devic,sinograms* sino,int size,float* tau,image* ans,doub
     
     }//end for i
 
-	time_out=time[NUM_PARTS];
-    free(subImage);
-    free(subImage->pixel);
+	time_out = 0;
+	for (i = 0; i<NUM_PARTS; i++)
+		time_out += time[i];
+	free(subImage->pixel);
+	free(subImage);
     //do not free subImage's pixels, because they are the output!
     
     return time_out;
@@ -737,7 +738,7 @@ int main(int argc,char* argv[])
 
     /*Step4 Execute the direct method */	
 	// Get the iterationstamp to evaluate performance
-    double time = bp(dev,sino,size,tau,img,0);
+    double time = bp(dev,sino,size,tau,img);
 
     printf("\tOverall processing time = %.4fms\n", (float)(time * 1E3));
 
@@ -751,7 +752,7 @@ int main(int argc,char* argv[])
 
   	for(i=size-1;i>=0;i--){
     	   for(j=0;j<size;j++){
-      		fprintf(output,"%f ",pixel[i*size+j]);  
+			fprintf(output, "%f ", (img->pixel)[i][j]);
     	   }
     		fprintf(output,"\n");
     	}
@@ -762,8 +763,7 @@ int main(int argc,char* argv[])
  
   	freeSino(sino);
   	free(sino);
-	free(pixel);
-  	free(filename);
+	free(filename);
  
   	return 0;
 }
