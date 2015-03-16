@@ -913,8 +913,8 @@ void bp(sinograms* sino,int size,float* tau,image* ans)
     
     }//end for i
 
-    free(subImage);
-    free(subImage->pixel);
+	free(subImage->pixel);
+	free(subImage);
     //do not free subImage's pixels, because they are the output!
     
     return;
